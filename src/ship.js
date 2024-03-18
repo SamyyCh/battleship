@@ -1,17 +1,24 @@
-function Ship() {
-
-    // ships
-
-    function hit() {
-        return length - 1
+class Ship {
+    constructor(length) {
+        this.position = [];
+        this.length = length;
+        this.hits = 0;
+        this.sunk = false
     }
 
-    function isSunk(length, hits) {
-        if (length > hits) 
-            return "ship is not sunk"
-        else
-            return "ship has sunk"
+    hit() {
+        if (this.sunk = false) {
+            this.hits++;
+        } else {
+            this.isSunk();
+        }
     }
-};
+
+    isSunk() {
+        if (this.hits === this.length) {
+            this.sunk = true
+        }
+    }
+}
 
 module.exports = Ship;
