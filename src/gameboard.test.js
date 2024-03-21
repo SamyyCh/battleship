@@ -39,3 +39,19 @@ describe("receiveAttack", () => {
         expect(board.receiveAttack(1, 1)).toEqual([[1, 1]]);
     })
 })
+
+describe("allSunk", () => {
+    it("all ship sunked", () => {
+        const board = new Gameboard();
+        board.placeShip(0, 0, 1);
+        board.receiveAttack(0, 0);
+        expect(board.allSunk()).toBe(true);
+    })
+
+    it("some ships aren't sunked", () => {
+        const board = new Gameboard();
+        board.placeShip(0, 0, 1);
+        board.receiveAttack(2, 2);
+        expect(board.allSunk()).toBe(false);
+    })
+})
