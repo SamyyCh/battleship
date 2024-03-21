@@ -6,6 +6,7 @@ class Gameboard {
         this.width = this.height;
         this.size = this.height * this.width;
         this.map = [];
+        this.ships = [];
 
         for (let i = 0; i < this.height; i++) {
             this.map.push(Array(this.width).fill(null));
@@ -23,22 +24,35 @@ class Gameboard {
             this.map[x + i][y] = ship;
         }
         ship.position = { x, y }
+        this.ships.push(ship)
     }
 
     receiveAttack(x, y) {
         this.missed = [];
         const ship = this.map[x][y];
-        const boat = new Ship();
     
         if (ship) {
-            boat.hit();
+            ship.hit();
+            if (ship.isSunk()) {
+                ship.sunk = true;
+            }
         } else {
             this.missed.push([x, y]);
         }
         return this.missed;
     }
     
-    
+
+    allSunk() {
+        for (const row of this.map) {
+            for (const cell of row) {
+                if (cell instanceof Ship && !cell.sunk) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
 
 module.exports = Gameboard
