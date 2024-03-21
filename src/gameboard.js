@@ -22,11 +22,23 @@ class Gameboard {
         for (let i = 0; i < length; i++) {
             this.map[x + i][y] = ship;
         }
+        ship.position = { x, y }
     }
 
     receiveAttack(x, y) {
-        
+        this.missed = [];
+        const ship = this.map[x][y];
+        const boat = new Ship();
+    
+        if (ship) {
+            boat.hit();
+        } else {
+            this.missed.push([x, y]);
+        }
+        return this.missed;
     }
+    
+    
 }
 
 module.exports = Gameboard
