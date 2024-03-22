@@ -7,6 +7,8 @@ class Gameboard {
         this.size = this.height * this.width;
         this.map = [];
         this.ships = [];
+        this.hitCord = [];
+        this.missed = [];
 
         for (let i = 0; i < this.height; i++) {
             this.map.push(Array(this.width).fill(null));
@@ -33,6 +35,7 @@ class Gameboard {
     
         if (ship) {
             ship.hit();
+            this.hitCord.push([x, y])
             if (ship.isSunk()) {
                 ship.sunk = true;
             }
