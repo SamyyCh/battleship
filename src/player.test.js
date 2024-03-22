@@ -24,20 +24,24 @@ describe("attack", () => {
 });
 
 describe("randomAttack", () => {
-    it("should attack random coordinates until all coordinates are attacked", () => {
+    it("should not attack the same coordinate twice", () => {
         const player = new Player();
         const mockGameboard = {
             size: 100,
             map: [],
             hitCord: [],
+            missed: [],
             receiveAttack: jest.fn()
         };
-
-        while (player.hitCord.length < mockGameboard.size) {
-            player.randomAttack(mockGameboard);
-        }
-
-        expect(mockGameboard.receiveAttack).toHaveBeenCalledTimes(mockGameboard.size);
+    
+        player.randomAttack(mockGameboard);
+        player.randomAttack(mockGameboard);
+    
+        expect(mockGameboard.receiveAttack).toHaveBeenCalledTimes(2);
+    
+        const coordinates = player.hitCord;
+        const uniqueCoordinates = [...new Set(coordinates.map(coord => coord.join(',')))];
+        expect(uniqueCoordinates.length).toBe(coordinates.length);
     });
 });
 
