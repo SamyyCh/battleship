@@ -1,5 +1,5 @@
-const Gameboard = require('./gameboard.js');
-const Ship = require('./ship.js');
+const Gameboard = require('../classes/gameboard.js');
+const Ship = require('../classes/ship.js');
 
 describe("map", () => {
     it('should be 100', () => {

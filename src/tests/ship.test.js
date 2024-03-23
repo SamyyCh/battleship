@@ -1,4 +1,4 @@
-const Ship = require('./ship.js');
+const Ship = require('../classes/ship.js');
 
 describe("hit", () => {
     it('should increase hits every hit', () => {
