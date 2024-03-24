@@ -1,3 +1,8 @@
+import './style.css';
+import baseUI from './classes/baseUI';
 
+const root = document.querySelector("#root");
 
-console.log('test')
+root.appendChild(baseUI);
+
+console.log('test2')
