@@ -1,7 +1,7 @@
 import './style.css';
-import baseUI from './classes/baseUI';
+import { baseUI } from './UI/baseUI';
 
-const root = document.querySelector("#root");
+const root = document.getElementById('root');
 
 root.appendChild(baseUI);
 
