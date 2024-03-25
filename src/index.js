@@ -1,8 +1,40 @@
 import './style.css';
-import { baseUI } from './UI/baseUI';
+import { createHeader } from './UI/header.js';
+import { createBoatList } from './UI/boatList.js';
+import { createGrid } from './UI/grid.js';
+import { createFooter } from './UI/footer.js';
 
-const root = document.getElementById('root');
+document.addEventListener('DOMContentLoaded', function () {
+    const root = document.getElementById('root');
+  
+    // Create header
+    const header = createHeader();
+    root.appendChild(header);
 
-root.appendChild(baseUI);
+    // Create board
+    const board = document.createElement('div');
+    board.classList.add('board');
+  
+    // Create boat lists
+    const playerBoats = ['Carrier', 'Battleship', 'Cruiser', 'Submarine', 'Destroyer'];
+    const playerBoatList = createBoatList(playerBoats, 'boatListPlayer');
+    board.appendChild(playerBoatList);
 
-console.log('test2')
+    // Create player grid
+    const playerGrid = createGrid('playerGrid');
+    board.appendChild(playerGrid);
+  
+    const computerBoatList = createBoatList(playerBoats, 'boatListComputer');
+    board.appendChild(computerBoatList);
+  
+    // Create computer grid
+    const computerGrid = createGrid('computerGrid');
+    board.appendChild(computerGrid);
+  
+    // Append board
+    root.appendChild(board);
+
+    // Create footer
+    const footer = createFooter();
+    root.appendChild(footer);
+  });
