@@ -50,13 +50,17 @@ ul {
     border: 1px solid rgb(255, 255, 255);
 }
 
-#grid {
+.grid-cell {
     border: 1px solid rgb(255, 255, 255);
     background-color: rgb(5, 92, 157);
 }
 
-#grid:hover {
+.grid-cell:hover {
     background-color: rgba(157, 168, 255, 0.7);
+}
+
+.grid-cell.ship {
+    background-color: purple;
 }
 
 .footer {
