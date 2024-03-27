@@ -2,6 +2,7 @@ import './style.css';
 import { createHeader } from './UI/header.js';
 import { createBoatList } from './UI/boatList.js';
 import { createGrid } from './UI/grid.js';
+import { createComputerGrid } from './UI/computerGrid.js';
 import { createFooter } from './UI/footer.js';
 const Gameloop = require('./gameloop.js');
 
@@ -29,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
     board.appendChild(computerBoatList);
   
     // Create computer grid
-    const computerGrid = createGrid('computerGrid');
+    const computerGrid = createComputerGrid('computerGrid');
     board.appendChild(computerGrid);
   
     // Append board

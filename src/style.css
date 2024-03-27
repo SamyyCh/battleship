@@ -63,6 +63,14 @@ ul {
     background-color: purple;
 }
 
+.grid-cell.hit {
+    background-color: red;
+}
+
+.grid-cell.miss {
+    background-color: gray;
+}
+
 .footer {
     display: flex;
     align-items: center;

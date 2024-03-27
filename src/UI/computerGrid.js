@@ -1,4 +1,4 @@
-export function createGrid(className) {
+export function createComputerGrid(className) {
   const grid = document.createElement('div');
   grid.classList.add(className);
 
@@ -6,7 +6,7 @@ export function createGrid(className) {
     for (let j = 0; j < 10; j++) {
       const gridItem = document.createElement('div');
       gridItem.classList.add('grid-cell');
-      gridItem.id = `cell-${j}-${i}`;
+      gridItem.id = `computer-cell-${j}-${i}`;
       grid.appendChild(gridItem);
     }
   }
