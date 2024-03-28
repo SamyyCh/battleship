@@ -4,7 +4,7 @@ import { createBoatList } from './UI/boatList.js';
 import { createGrid } from './UI/grid.js';
 import { createComputerGrid } from './UI/computerGrid.js';
 import { createFooter } from './UI/footer.js';
-const Gameloop = require('./gameloop.js');
+const Gameloop = require('./modules/gameloop.js');
 
 document.addEventListener('DOMContentLoaded', function () {
     const root = document.getElementById('root');
@@ -42,5 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize and run the game loop
     const game = new Gameloop();
-    game.runGame();
+    game.populateBoard();
+    game.playerAttack();
+    game.computerAttack();
 });

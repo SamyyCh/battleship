@@ -5,28 +5,60 @@ class Gameboard {
         this.height = 10;
         this.width = this.height;
         this.size = this.height * this.width;
-        this.map = [];
+        this.map = Array.from({ length: this.height }, () => Array(this.width).fill(null));
         this.ships = [];
         this.hitCord = [];
         this.missed = [];
-
-        for (let i = 0; i < this.height; i++) {
-            this.map.push(Array(this.width).fill(null));
-        }
     }
 
-    placeShip(x, y, length) {
-        const ship = new Ship(length);
+    isValidCell(x, y) {
+        return x >= 0 && x < this.width && y >= 0 && y < this.height && !this.map[x][y];
+    }
 
-        if (x + length > this.width || y + length > this.height) {
-            throw new Error("Out of bounds");
+    isValidShipPlacement(x, y, length, horizontal) {
+        if (horizontal) {
+            for (let i = 0; i < length; i++) {
+                if (!this.isValidCell(x + i, y)) {
+                    return false;
+                }
+            }
+        } else {
+            for (let i = 0; i < length; i++) {
+                if (!this.isValidCell(x, y + i)) {
+                    return false;
+                }
+            }
         }
+        return true;
+    }
 
-        for (let i = 0; i < length; i++) {
-            this.map[x + i][y] = ship;
+    placeShip(x, y, length, horizontal) {
+        if (this.isValidShipPlacement(x, y, length, horizontal)) {
+            const ship = new Ship(length);
+            for (let i = 0; i < length; i++) {
+                if (horizontal) {
+                    this.map[x + i][y] = ship;
+                } else {
+                    this.map[x][y + i] = ship;
+                }
+            }
+            ship.position = { x, y };
+            this.ships.push(ship);
+            return true;
         }
-        ship.position = { x, y }
-        this.ships.push(ship)
+        return false;
+    }
+
+    placeRandomShips(shipLengths) {
+        shipLengths.forEach((length) => {
+            let placed = false;
+            while (!placed) {
+                const x = Math.floor(Math.random() * this.width);
+                const y = Math.floor(Math.random() * this.height);
+                const horizontal = Math.random() < 0.5;
+                placed = this.placeShip(x, y, length, horizontal);
+            }
+        });
     }
 
     receiveAttack(x, y) {
