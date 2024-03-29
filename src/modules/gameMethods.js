@@ -14,30 +14,34 @@ class GameMethod {
                 gameboard: new Gameboard(),
             },
         ];
+        this.shipLengths = [5, 4, 3, 3, 2]
     }
 
     populateBoard() {
-        const shipLengths = [5, 4, 3, 3, 2];
-        // this.players[0].gameboard.placeRandomShips(shipLengths);
-        this.players[1].gameboard.placeRandomShips(shipLengths);
-
         const gameboardSize = 10;
-
+    
         for (let x = 0; x < gameboardSize; x++) {
             for (let y = 0; y < gameboardSize; y++) {
                 const playerCell = document.getElementById(`cell-${x}-${y}`);
-                const playerShip = this.players[0].gameboard.map[x][y];
                 const computerCell = document.getElementById(`computer-cell-${x}-${y}`);
+    
+                playerCell.classList.remove('ship', 'hit', 'miss');
+                computerCell.classList.remove('computer-ship', 'hit', 'miss');
+    
+                const playerShip = this.players[0].gameboard.map[x][y];
                 const computerShip = this.players[1].gameboard.map[x][y];
+    
                 if (playerShip) {
                     playerCell.classList.add('ship');
                 }
+    
                 if (computerShip) {
                     computerCell.classList.add('computer-ship');
                 }
             }
         }
     }
+    
 
     playerAttack() {
         const gridContainer = document.querySelector('.computerGrid');
@@ -70,3 +74,5 @@ class GameMethod {
         });
     }
 }
+
+module.exports = GameMethod;

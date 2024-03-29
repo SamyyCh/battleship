@@ -5,7 +5,7 @@ import { createButton } from './button.js';
 import { createComputerGrid } from './computerGrid.js';
 import { createFooter } from './footer.js';
 
-export default document.addEventListener('DOMContentLoaded', function () {
+function initializeUI() {
     const root = document.getElementById('root');
   
     // Create header
@@ -42,4 +42,6 @@ export default document.addEventListener('DOMContentLoaded', function () {
     // Create footer
     const footer = createFooter();
     root.appendChild(footer);
-});
+}
+
+export { initializeUI };
