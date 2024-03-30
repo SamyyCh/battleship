@@ -25,9 +25,6 @@ class GameMethod {
                 const playerCell = document.getElementById(`cell-${x}-${y}`);
                 const computerCell = document.getElementById(`computer-cell-${x}-${y}`);
     
-                playerCell.classList.remove('ship', 'hit', 'miss');
-                computerCell.classList.remove('computer-ship', 'hit', 'miss');
-    
                 const playerShip = this.players[0].gameboard.map[x][y];
                 const computerShip = this.players[1].gameboard.map[x][y];
     
@@ -42,7 +39,6 @@ class GameMethod {
         }
     }
     
-
     playerAttack() {
         const gridContainer = document.querySelector('.computerGrid');
         gridContainer.addEventListener('click', (event) => {

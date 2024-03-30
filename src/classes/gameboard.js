@@ -61,11 +61,7 @@ class Gameboard {
                 placed = this.placeShip(x, y, length, horizontal);
             }
         });
-    }
-
-    clearShips() {
-        this.ships = [];
-    }
+    }  
 
     receiveAttack(x, y) {
         this.missed = [];
