@@ -51,7 +51,6 @@ class Gameboard {
 
     placeRandomShips(shipLengths) {
         this.ships = [];
-        console.log(this.ships)
         shipLengths.forEach((length) => {
             let placed = false;
             while (!placed) {
@@ -61,7 +60,8 @@ class Gameboard {
                 placed = this.placeShip(x, y, length, horizontal);
             }
         });
-    }  
+    }
+  
 
     receiveAttack(x, y) {
         this.missed = [];

@@ -72,6 +72,10 @@ ul {
     background-color: gray;
 }
 
+.sunk {
+    color: red;
+}
+
 .footer {
     display: flex;
     align-items: center;

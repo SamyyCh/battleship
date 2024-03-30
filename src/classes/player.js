@@ -23,11 +23,11 @@ class Player {
                 xCord = Math.floor(Math.random() * 10);
                 yCord = Math.floor(Math.random() * 10);
             } while (this.hitCord.some(coord => coord[0] === xCord && coord[1] === yCord) || 
-                    (Gameboard.missed.some(coord => coord[0] === xCord && coord[1] === yCord)));
+                     this.missed.some(coord => coord[0] === xCord && coord[1] === yCord));
+            
             this.attack(xCord, yCord, Gameboard);
         }
-    }
-    
+    }          
 }
 
 module.exports = Player;
