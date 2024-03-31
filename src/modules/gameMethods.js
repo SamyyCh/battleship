@@ -1,6 +1,7 @@
 const Gameboard = require('../classes/gameboard');
 const Player = require('../classes/player');
 const Ship = require('../classes/ship');
+import createGameOver from '../UI/gameOver';
 
 class GameMethod {
     constructor() {
@@ -54,15 +55,19 @@ class GameMethod {
                     gridCell.classList.add('miss');
                 }
                 this.computerAttack();
-
+    
                 if (this.gameOver()) {
-                    // Game over logic here...
+                    const board = document.querySelector('.board');
+                    board.innerHTML = '';
+                    const gameOverScreen = createGameOver();
+                    board.removeAttribute('class'); 
+                    board.classList.add('over');
+                    board.appendChild(gameOverScreen);
                 }
             }
         });
     }
     
-
     computerAttack() {
         this.players[1].player.randomAttack(this.players[0].gameboard);
     
@@ -81,13 +86,17 @@ class GameMethod {
             cell.classList.add('miss');
             this.players[0].player.missed.push([x, y]);
         });
-
-        if (this.gameOver()) {
-            // Create game over page
-        }
-    }
     
-
+        if (this.gameOver()) {
+            const board = document.querySelector('.board');
+            board.innerHTML = '';
+            const gameOverScreen = createGameOver();
+            board.removeAttribute('class'); 
+            board.classList.add('over');
+            board.appendChild(gameOverScreen);
+        }
+    }    
+    
     markShipSunkedPlayer() {
         const shipLengths = [5, 4, 3, 2, 1];
     
@@ -117,11 +126,8 @@ class GameMethod {
     gameOver() {
         const player1AllSunk = this.players[0].gameboard.allSunk();
         const player2AllSunk = this.players[1].gameboard.allSunk();
-
         return player1AllSunk || player2AllSunk;
     }
-    
-    
 }
 
-module.exports = GameMethod;
+export default GameMethod;
