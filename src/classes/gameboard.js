@@ -45,12 +45,15 @@ class Gameboard {
             ship.position = { x, y };
             this.ships.push(ship);
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
+       
 
     placeRandomShips(shipLengths) {
         this.ships = [];
+        console.log(this.ships)
         shipLengths.forEach((length) => {
             let placed = false;
             while (!placed) {

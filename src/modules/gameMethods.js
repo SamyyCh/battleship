@@ -38,12 +38,38 @@ class GameMethod {
                 }
             }
         }
-    }
+    }    
+
+    clearShips() {
+        const gameboardSize = 10;
+    
+        for (let x = 0; x < gameboardSize; x++) {
+            for (let y = 0; y < gameboardSize; y++) {
+                const playerCells = document.querySelectorAll(`#cell-${x}-${y}`);
+                const computerCells = document.querySelectorAll(`#computer-cell-${x}-${y}`);
+    
+                playerCells.forEach(playerCell => {
+                    playerCell.classList.remove('ship');
+                    playerCell.classList.remove('hit');
+                    playerCell.classList.remove('miss');
+                });
+    
+                computerCells.forEach(computerCell => {
+                    computerCell.classList.remove('computer-ship');
+                    computerCell.classList.remove('hit');
+                    computerCell.classList.remove('miss');
+                });
+    
+                this.players[0].gameboard.map[x][y] = null;
+                this.players[1].gameboard.map[x][y] = null;
+            }
+        }
+    }       
     
     playerAttack() {
         const gridContainer = document.querySelector('.computerGrid');
         gridContainer.addEventListener('click', (event) => {
-            if (event.target.classList.contains('grid-cell')) {
+            if (event.target.classList.contains('grid-cell') && !event.target.classList.contains('hit') && !event.target.classList.contains('miss')) {
                 const gridCell = event.target;
                 const ship = gridCell.classList.contains('computer-ship');
                 if (ship) {
@@ -57,16 +83,18 @@ class GameMethod {
                 this.computerAttack();
     
                 if (this.gameOver()) {
-                    const board = document.querySelector('.board');
-                    board.innerHTML = '';
-                    const gameOverScreen = createGameOver();
-                    board.removeAttribute('class'); 
-                    board.classList.add('over');
-                    board.appendChild(gameOverScreen);
+                    setTimeout(() => {
+                        const board = document.querySelector('.board');
+                        board.innerHTML = '';
+                        const gameOverScreen = createGameOver();
+                        board.removeAttribute('class'); 
+                        board.classList.add('over');
+                        board.appendChild(gameOverScreen);
+                    }, 1000)
                 }
             }
         });
-    }
+    }    
     
     computerAttack() {
         this.players[1].player.randomAttack(this.players[0].gameboard);
@@ -88,12 +116,14 @@ class GameMethod {
         });
     
         if (this.gameOver()) {
-            const board = document.querySelector('.board');
-            board.innerHTML = '';
-            const gameOverScreen = createGameOver();
-            board.removeAttribute('class'); 
-            board.classList.add('over');
-            board.appendChild(gameOverScreen);
+            setTimeout(() => {
+                const board = document.querySelector('.board');
+                board.innerHTML = '';
+                const gameOverScreen = createGameOver();
+                board.removeAttribute('class'); 
+                board.classList.add('over');
+                board.appendChild(gameOverScreen);
+            }, 1000)
         }
     }    
     
@@ -122,6 +152,15 @@ class GameMethod {
             }
         }
     }
+
+    // declareWinner() {
+    //     const player1AllSunk = this.players[1].gameboard.allSunk();
+    //     if (player1AllSunk) {
+    //         return 'You';
+    //     } else {
+    //         return 'Computer';
+    //     }
+    // }
 
     gameOver() {
         const player1AllSunk = this.players[0].gameboard.allSunk();
