@@ -15,17 +15,32 @@ class Player {
     }
 
     randomAttack(Gameboard) {
+        Gameboard.size = 10;
         if ((this.hitCord.length + this.missed.length) === Gameboard.size) {
             return;
         } else {
-            let xCord, yCord;
-            do {
-                xCord = Math.floor(Math.random() * 10);
-                yCord = Math.floor(Math.random() * 10);
-            } while (this.hitCord.some(coord => coord[0] === xCord && coord[1] === yCord) || 
-                     this.missed.some(coord => coord[0] === xCord && coord[1] === yCord));
-            
-            this.attack(xCord, yCord, Gameboard);
+            let availableCoords = [];
+            for (let x = 0; x < Gameboard.size; x++) {
+                for (let y = 0; y < Gameboard.size; y++) {
+                    const coord = `${x}-${y}`;
+                    const cell = document.getElementById(`cell-${x}-${y}`);
+                    if (!cell) {
+                        console.error(`Cell not found for coordinate: ${coord}`);
+                        continue;
+                    }
+                    if (!cell.classList.contains('hit') && !cell.classList.contains('miss')) {
+                        availableCoords.push(coord);
+                    }
+                }
+            }
+    
+            if (availableCoords.length === 0) {
+                return;
+            }
+    
+            const randomIndex = Math.floor(Math.random() * availableCoords.length);
+            const [xCord, yCord] = availableCoords[randomIndex].split('-');
+            this.attack(parseInt(xCord), parseInt(yCord), Gameboard);
         }
     }          
 }

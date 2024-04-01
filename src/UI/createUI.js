@@ -17,7 +17,7 @@ function initializeUI() {
     board.classList.add('board');
   
     // Create boat lists
-    const playerBoats = ['Carrier', 'Battleship', 'Cruiser', 'Submarine', 'Destroyer'];
+    const playerBoats = ['Carrier (5)', 'Battleship (4)', 'Cruiser (3)', 'Submarine (2)', 'Destroyer (1)'];
     const playerBoatList = createBoatList(playerBoats, 'boatListPlayer');
     board.appendChild(playerBoatList);
 
