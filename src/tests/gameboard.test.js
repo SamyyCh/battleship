@@ -9,20 +9,30 @@ describe("map", () => {
 })
 
 describe("placeShip", () => {
-    it('should throw an error', () => {
+    it('should throw an error if ship cannot be placed', () => {
         const map = new Gameboard();
-        expect(() => map.placeShip(6, 1, 5)).toThrow(Error)
-    })
+        expect(map.placeShip(6, 1, 5, true)).toBe(false);
+    });
 
-    it('should place a ship', () => {
+    it('should place a ship horizontally', () => {
         const map = new Gameboard();
-        map.placeShip(2, 3, 3);
+        map.placeShip(2, 3, 3, true);
 
         for (let i = 0; i < 3; i++) {
-            expect(map.map[2 + i][3]).toBeInstanceOf(Ship)
+            expect(map.map[2 + i][3]).toBeInstanceOf(Ship);
         }
-    })
-})
+    });
+
+    it('should place a ship vertically', () => {
+        const map = new Gameboard();
+        map.placeShip(2, 3, 3, false);
+
+        for (let i = 0; i < 3; i++) {
+            expect(map.map[2][3 + i]).toBeInstanceOf(Ship);
+        }
+    });
+});
+
 
 describe("receiveAttack", () => {
     it("receive and hit boat", () => {

@@ -33,6 +33,10 @@ describe("randomAttack", () => {
             missed: [],
             receiveAttack: jest.fn()
         };
+
+        global.document = {
+            getElementById: jest.fn(() => ({ classList: { contains: jest.fn(() => false) } }))
+        };
     
         player.randomAttack(mockGameboard);
         player.randomAttack(mockGameboard);
@@ -42,6 +46,10 @@ describe("randomAttack", () => {
         const coordinates = player.hitCord;
         const uniqueCoordinates = [...new Set(coordinates.map(coord => coord.join(',')))];
         expect(uniqueCoordinates.length).toBe(coordinates.length);
+
+        delete global.document;
     });
 });
+
+
 
