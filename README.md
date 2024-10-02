@@ -1,6 +1,6 @@
 # Battleship Game
 
-This is a web-based implementation of the classic game Battleship, built using JavaScript, HTML, and CSS. The project is part of [The Odin Project's](https://www.theodinproject.com/lessons/node-path-javascript-battleship) curriculum and demonstrates the application of Test-Driven Development (TDD) using Jest.
+This is a web-based implementation of the classic game Battleship, built using JavaScript, HTML, and CSS. The project is part of [The Odin Project's](https://www.theodinproject.com/lessons/node-path-javascript-battleship) curriculum.
 
 You can play the game live [here](https://samyych.github.io/battleship/).
 
